@@ -55,15 +55,18 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        paint.setAntiAlias(false);
+       // paint.setAntiAlias(false);
         currX = event.getX();
         currY = event.getY();
         //invalidate();
-        float radious  = (float) 1.0;
+        float radious  = (float) 30.0;
         System.out.println(currX +" ,,, " + currY);
 
+        //can.drawPoint(currX, currY, paint);
         can.drawCircle(currX, currY, radious, paint);
-        paint.setAntiAlias(true);
+       // paint.setAntiAlias(true);
+        LinearLayout l1 = (LinearLayout)findViewById(R.id.drawarea);
+        l1.setBackgroundDrawable(new BitmapDrawable(bg));
         //Log.d(TAG, "View's On touch is called! X= "+currX + ", Y= "+currY);
         return super.onTouchEvent(event);
     }
