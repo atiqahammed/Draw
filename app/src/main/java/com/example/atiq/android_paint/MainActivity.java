@@ -32,6 +32,16 @@ public class MainActivity extends AppCompatActivity {
     Canvas can = new Canvas(bg);
 
 
+
+
+    public static final boolean DEBUG_SHOW_POINTS = false;
+    public static final int POINT_TYPE_SAMPLED = 1;
+    public static final int POINT_TYPE_INTERPOLATED = 2;
+
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,13 +59,16 @@ public class MainActivity extends AppCompatActivity {
         currX = event.getX();
         currY = event.getY();
         //invalidate();
+        float radious  = (float) 1.0;
         System.out.println(currX +" ,,, " + currY);
 
-        can.drawPoint(currX, currY, paint);
+        can.drawCircle(currX, currY, radious, paint);
         paint.setAntiAlias(true);
         //Log.d(TAG, "View's On touch is called! X= "+currX + ", Y= "+currY);
         return super.onTouchEvent(event);
     }
+
+
 
 
 }
