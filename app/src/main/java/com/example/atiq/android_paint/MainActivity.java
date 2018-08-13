@@ -49,15 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        currX = event.getX();
-        currY = event.getY();
-        //invalidate();
-        System.out.println(currX +" ,,, " + currY);
-        //Log.d(TAG, "View's On touch is called! X= "+currX + ", Y= "+currY);
-        return super.onTouchEvent(event);
-    }
+    
 
     // pause of master for touch listener
 }
