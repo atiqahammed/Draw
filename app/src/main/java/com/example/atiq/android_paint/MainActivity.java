@@ -17,16 +17,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 public class MainActivity extends AppCompatActivity {
-
-    private static final String TAG = "Desenho";
-
-    private ShapeDrawable rectangle;
-    private Paint paint;
-    private float currX, currY;
-    private Rect blue, gray;
-
-
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
