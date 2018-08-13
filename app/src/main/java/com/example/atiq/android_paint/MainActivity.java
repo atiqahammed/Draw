@@ -25,32 +25,37 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MY Painting";
-    private float currX, currY;
-    private Paint paint = new Paint();
-    private Bitmap bg = Bitmap.createBitmap(480,800, Bitmap.Config.ARGB_8888);
-    private Canvas can = new Canvas(bg);
+    private float currentXCoordinate, currentYCoordinate;
+    private Paint paint;
+    private Bitmap myBitMap;
+    private Canvas canvas;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        init();
+    }
 
+    private void init() {
+        paint = new Paint();
         paint.setColor(Color.RED);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(3);
-
+        myBitMap = Bitmap.createBitmap(480,800, Bitmap.Config.ARGB_8888);
+        canvas = new Canvas(myBitMap);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        currX = event.getX();
-        currY = event.getY();
-        float radious  = (float) 30.0;
-        System.out.println(currX +" ,,, " + currY);
-        can.drawCircle(currX, currY, radious, paint);
+        currentXCoordinate = event.getX();
+        currentYCoordinate = event.getY();
+        //float radious  = (float) 30.0;
+        //System.out.println(currX +" ,,, " + currY);
+        //canvas.drawCircle(currentXCoordinate, currentYCoordinate, radious, paint);
         LinearLayout l1 = (LinearLayout)findViewById(R.id.drawarea);
-        l1.setBackgroundDrawable(new BitmapDrawable(bg));
+        l1.setBackgroundDrawable(new BitmapDrawable(myBitMap));
         return super.onTouchEvent(event);
     }
 }
