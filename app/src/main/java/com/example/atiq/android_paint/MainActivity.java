@@ -21,9 +21,15 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "Desenho";
     private ShapeDrawable rectangle;
-    private Paint paint;
+    //private Paint paint;
     private float currX, currY;
     private Rect blue, gray;
+
+    Paint paint = new Paint();
+
+
+    Bitmap bg = Bitmap.createBitmap(480,800, Bitmap.Config.ARGB_8888);
+    Canvas can = new Canvas(bg);
 
 
     @Override
@@ -31,14 +37,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        paint.setColor(Color.RED);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(3);
+
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        paint.setAntiAlias(false);
         currX = event.getX();
         currY = event.getY();
         //invalidate();
         System.out.println(currX +" ,,, " + currY);
+
+        can.drawPoint(currX, currY, paint);
+        paint.setAntiAlias(true);
         //Log.d(TAG, "View's On touch is called! X= "+currX + ", Y= "+currY);
         return super.onTouchEvent(event);
     }
