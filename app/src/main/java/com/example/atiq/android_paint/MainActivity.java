@@ -54,4 +54,6 @@ public class MainActivity extends AppCompatActivity {
         l1.setBackgroundDrawable(new BitmapDrawable(bg));
 
     }
+
+    // pause of master for touch listener
 }
