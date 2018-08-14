@@ -1,5 +1,6 @@
 # Android-Paint
 
+## Drawing on touch
 Initially I was trying to implement some functionality with which I could drow something touching the screen. Following code helped me i that case.
 
 ```java
