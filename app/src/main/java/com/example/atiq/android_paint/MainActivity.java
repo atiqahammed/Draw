@@ -1,5 +1,6 @@
 package com.example.atiq.android_paint;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -11,6 +12,7 @@ import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RectShape;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,6 +25,11 @@ import android.widget.LinearLayout;
 import android.graphics.PointF;
 import android.view.View;
 import android.widget.Toast;
+
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+
+import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MY Painting";
@@ -61,6 +68,24 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+
+        FileOutputStream outputStream;
+        String filename = "myfile";
+        String fileContents = "Hello world!";
+        try {
+            outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
+            outputStream.write(fileContents.getBytes());
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+
+       // File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "DCIM");
+        //myBitMap.compress(Bitmap.CompressFormat.PNG, 100, file);
+
+
         Toast.makeText(this, "Drawing has been saved", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_HOME);
