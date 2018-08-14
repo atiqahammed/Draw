@@ -1,5 +1,6 @@
 package com.example.atiq.android_paint;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -57,4 +58,14 @@ public class MainActivity extends AppCompatActivity {
         layout.setBackgroundDrawable(new BitmapDrawable(myBitMap));
         return super.onTouchEvent(event);
     }
+
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(this, "Drawing has been saved", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
 }
