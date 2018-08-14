@@ -51,11 +51,10 @@ public class MainActivity extends AppCompatActivity {
     public boolean onTouchEvent(MotionEvent event) {
         currentXCoordinate = event.getX();
         currentYCoordinate = event.getY();
-        //float radious  = (float) 30.0;
-        //System.out.println(currX +" ,,, " + currY);
-        //canvas.drawCircle(currentXCoordinate, currentYCoordinate, radious, paint);
-        LinearLayout l1 = (LinearLayout)findViewById(R.id.drawarea);
-        l1.setBackgroundDrawable(new BitmapDrawable(myBitMap));
+        float radious  = (float) 30.0;
+        canvas.drawCircle(currentXCoordinate, currentYCoordinate, radious, paint);
+        LinearLayout layout = (LinearLayout)findViewById(R.id.drawarea);
+        layout.setBackgroundDrawable(new BitmapDrawable(myBitMap));
         return super.onTouchEvent(event);
     }
 }
