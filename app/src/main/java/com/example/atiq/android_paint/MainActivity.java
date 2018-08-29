@@ -30,12 +30,15 @@ import android.graphics.PointF;
 import android.view.View;
 import android.widget.Toast;
 
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MY Painting";
@@ -90,7 +93,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        FileOutputStream outputStream;
+
+       /* FileOutputStream outputStream;
         String filename = "myfile";
         String fileContents = "Hello world!";
         try {
@@ -100,12 +104,15 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        */
+
+
 
 
 
        // File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "DCIM");
         //myBitMap.compress(Bitmap.CompressFormat.PNG, 100, file);
-
+        getScreenshotBmp();
 
         Toast.makeText(this, "Drawing has been saved", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(Intent.ACTION_MAIN);
@@ -113,6 +120,39 @@ public class MainActivity extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
+
+    public Bitmap getScreenshotBmp() {
+
+
+        FileOutputStream fileOutputStream = null;
+
+        File path = Environment
+                .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+
+        String uniqueID = UUID.randomUUID().toString();
+
+        File file = new File(path, uniqueID + ".jpg");
+        try {
+            fileOutputStream = new FileOutputStream(file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        myBitMap.compress(Bitmap.CompressFormat.JPEG, 30, fileOutputStream);
+
+        try {
+            fileOutputStream.flush();
+            fileOutputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return myBitMap;
+    }
+
+
+
+
+
 
     public void captureProblemPhoto(View view) {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
