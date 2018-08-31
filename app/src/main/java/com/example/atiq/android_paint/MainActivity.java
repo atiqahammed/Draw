@@ -6,13 +6,8 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Path;
 import android.graphics.Point;
-import android.graphics.Rect;
-import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.RectShape;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -21,24 +16,18 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
-import android.view.View;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.MotionEvent;
 import android.widget.LinearLayout;
-import android.graphics.PointF;
-import android.view.View;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 
 import java.io.File;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MY Painting";
@@ -94,25 +83,15 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
 
 
-       /* FileOutputStream outputStream;
-        String filename = "myfile";
-        String fileContents = "Hello world!";
-        try {
-            outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
-            outputStream.write(fileContents.getBytes());
-            outputStream.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state)) {
+            Toast.makeText(this, "Drawing has been saved", Toast.LENGTH_SHORT).show();
+
+            //return true;
         }
-        */
 
 
-
-
-
-       // File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "DCIM");
-        //myBitMap.compress(Bitmap.CompressFormat.PNG, 100, file);
-        getScreenshotBmp();
 
         Toast.makeText(this, "Drawing has been saved", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(Intent.ACTION_MAIN);
@@ -121,61 +100,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public Bitmap getScreenshotBmp() {
 
-
-        FileOutputStream fileOutputStream = null;
-
-        File path = Environment
-                .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-
-        String uniqueID = UUID.randomUUID().toString();
-
-        File file = new File(path, uniqueID + ".jpg");
-        try {
-            fileOutputStream = new FileOutputStream(file);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        myBitMap.compress(Bitmap.CompressFormat.JPEG, 30, fileOutputStream);
-
-        try {
-            fileOutputStream.flush();
-            fileOutputStream.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return myBitMap;
-    }
-
-
-
-
-
-
-    public void captureProblemPhoto(View view) {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        file = Uri.fromFile(getOutputMediaFile());
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, file);
-
-        startActivityForResult(intent, CAPTURE_REQUEST);
-    }
-
-
-    private static File getOutputMediaFile(){
-        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES), "ComplainBoxPhoto");
-
-        if (!mediaStorageDir.exists()){
-            if (!mediaStorageDir.mkdirs()){
-                return null;
-            }
-        }
-
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        capturedImagePath = mediaStorageDir.getPath() + File.separator + "IMG_"+ timeStamp + ".jpg";
-        return new File(capturedImagePath);
-    }
 
 }
