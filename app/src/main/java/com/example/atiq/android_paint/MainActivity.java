@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         //myBitMap.compress(Bitmap.CompressFormat.PNG, 100, file);
 
 
-        Toast.makeText(this, "Drawing has been saved", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Exiting from Draw", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_HOME);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
