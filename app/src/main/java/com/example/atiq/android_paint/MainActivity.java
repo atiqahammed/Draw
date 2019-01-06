@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
@@ -16,6 +17,7 @@ import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.support.v7.app.AppCompatActivity;
@@ -51,7 +53,14 @@ public class MainActivity extends AppCompatActivity {
         paint.setColor(Color.RED);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(3);
-        myBitMap = Bitmap.createBitmap(480,800, Bitmap.Config.ARGB_8888);
+
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int width = size.x;
+        int height = size.y;
+
+        myBitMap = Bitmap.createBitmap(width,height, Bitmap.Config.ARGB_8888);
         canvas = new Canvas(myBitMap);
     }
 
@@ -59,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onTouchEvent(MotionEvent event) {
         currentXCoordinate = event.getX();
         currentYCoordinate = event.getY();
-        float radious  = (float) 30.0;
+        float radious  = (float) 10.0;
         canvas.drawCircle(currentXCoordinate, currentYCoordinate, radious, paint);
         LinearLayout layout = (LinearLayout)findViewById(R.id.drawarea);
         layout.setBackgroundDrawable(new BitmapDrawable(myBitMap));
@@ -72,13 +81,7 @@ public class MainActivity extends AppCompatActivity {
         FileOutputStream outputStream;
         String filename = "myfile";
         String fileContents = "Hello world!";
-        try {
-            outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
-            outputStream.write(fileContents.getBytes());
-            outputStream.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
 
 
 
